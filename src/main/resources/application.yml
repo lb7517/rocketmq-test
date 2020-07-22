@@ -1,0 +1,35 @@
+project:
+  name: oms
+
+server:
+  port: 8077
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: invoke-consumer
+
+rocketmq:
+  consumerGroup: invokeConsumerGroup
+  producerGroup: invokeProducerGroup
+  topic: meaom-ability-data-notify
+  accessKey: RocketMQ
+  secretKey: 12345678
+
+---
+spring:
+  profiles: dev
+rocketmq:
+  namesrvAddr: ${ROCKETMQ_HOST:127.0.0.1:9876}
+---
+spring:
+  profiles: test
+rocketmq:
+  namesrvAddr: ${ROCKETMQ_HOST:10.10.32.55:9876}
+
+---
+spring:
+  profiles: prod
+rocketmq:
+  namesrvAddr: ${ROCKET_MQ_ENDPOINT:127.0.0.1:9876}
